@@ -2,6 +2,7 @@ import './RequestLoanForm.css'
 import MyInput from './MyInput';
 import Modal from './Modal';
 import { useState } from "react";
+import { LoanInputContext } from "../contexts/LoanInputContextForm"
 
 export default function RequestLoanForm() {
     const [errorMessage, setErrorMessage] = useState(null)
@@ -50,22 +51,27 @@ export default function RequestLoanForm() {
             <form onSubmit={handleSubmitPage} className="request-loan-form">
                 <h1>Request Loan</h1>
                 <hr />
-                <MyInput
-                inputName={"Name"}
-                value={formInputs.name}
-                handleChange={handleNameInputChange}
-                />
-                <MyInput
-                inputName={"Phone Number"}
-                value={formInputs.phoneNumber}
-                handleChange={handlePhoneNumberInputChange}
-                />
-                <MyInput
-                inputName={"Age"}
-                value={formInputs.age}
-                handleChange={handleAgeInputChange}
-                />
-
+                <LoanInputContext.Provider value={{
+                    labelTitle: "Name",
+                    handleChange: handleNameInputChange,
+                    inputValue: formInputs.name,
+                }}>
+                    <MyInput/>
+                </LoanInputContext.Provider>
+                <LoanInputContext.Provider value={{
+                    labelTitle: "Phone Number",
+                    handleChange: handlePhoneNumberInputChange,
+                    inputValue: formInputs.phoneNumber,
+                }}>
+                    <MyInput/>
+                </LoanInputContext.Provider>
+                <LoanInputContext.Provider value={{
+                    labelTitle: "Age",
+                    handleChange: handleAgeInputChange,
+                    inputValue: formInputs.age,
+                }}>
+                    <MyInput/>
+                </LoanInputContext.Provider>
                 <label htmlFor="isEmployee">Are You an Employee?</label>
                 <input
                     id="isEmployee"
