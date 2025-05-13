@@ -1,4 +1,5 @@
 import './RequestLoanForm.css'
+import MyInput from './MyInput';
 import Modal from './Modal';
 import { useState } from "react";
 
@@ -26,40 +27,43 @@ export default function RequestLoanForm() {
         setShowModal(true)
         console.log(formInputs);
     }
+
     function handleHiddeModal() {
         setShowModal(false)
     }
+
+    function handleNameInputChange(value) {
+        setFormInputs({ ...formInputs, name: value });
+    }
+
+    function handlePhoneNumberInputChange(value) {
+        setFormInputs({ ...formInputs, phoneNumber: value });
+    }
+
+    function handleAgeInputChange(value) {
+        setFormInputs({ ...formInputs, age: value });
+    }
+
     let btnIsDisabled = formInputs.name == "" || formInputs.phoneNumber == "" || formInputs.age == ""
     return (
         <div className='flex' onClick={handleHiddeModal}>
             <form onSubmit={handleSubmitPage} className="request-loan-form">
                 <h1>Request Loan</h1>
                 <hr />
-                <label htmlFor="name">Name</label>
-                <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    value={formInputs.name}
-                    onChange={e => setFormInputs({ ...formInputs, name: e.target.value })}
+                <MyInput
+                inputName={"Name"}
+                value={formInputs.name}
+                handleChange={handleNameInputChange}
                 />
-
-                <label htmlFor="phoneNumber">Phone Number</label>
-                <input
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    type="number"
-                    value={formInputs.phoneNumber}
-                    onChange={e => setFormInputs({ ...formInputs, phoneNumber: e.target.value })}
+                <MyInput
+                inputName={"Phone Number"}
+                value={formInputs.phoneNumber}
+                handleChange={handlePhoneNumberInputChange}
                 />
-
-                <label htmlFor="age">Age</label>
-                <input
-                    id="age"
-                    name="age"
-                    type="number"
-                    value={formInputs.age}
-                    onChange={e => setFormInputs({ ...formInputs, age: e.target.value })}
+                <MyInput
+                inputName={"Age"}
+                value={formInputs.age}
+                handleChange={handleAgeInputChange}
                 />
 
                 <label htmlFor="isEmployee">Are You an Employee?</label>
