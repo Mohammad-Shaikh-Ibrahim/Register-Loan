@@ -1,8 +1,8 @@
-import './RegisterForm.css'
+import './RequestLoanForm.css'
 import Modal from './Modal';
 import { useState } from "react";
 
-export default function RegisterForm() {
+export default function RequestLoanForm() {
     const [errorMessage, setErrorMessage] = useState(null)
     const [showModal, setShowModal] = useState(false)
     const [formInputs, setFormInputs] = useState({
@@ -32,8 +32,8 @@ export default function RegisterForm() {
     let btnIsDisabled = formInputs.name == "" || formInputs.phoneNumber == "" || formInputs.age == ""
     return (
         <div className='flex' onClick={handleHiddeModal}>
-            <form onSubmit={handleSubmitPage} className="register-form">
-                <h1>Register Loan</h1>
+            <form onSubmit={handleSubmitPage} className="request-loan-form">
+                <h1>Request Loan</h1>
                 <hr />
                 <label htmlFor="name">Name</label>
                 <input
@@ -71,22 +71,22 @@ export default function RegisterForm() {
                     onChange={e => setFormInputs({ ...formInputs, isEmployee: e.target.checked })}
                 />
 
-
-                <label htmlFor="salary">Salary</label>
-                <select
-                    id="salary"
-                    name="salary"
-                    value={formInputs.salary}
-                    onChange={(e) =>
-                        setFormInputs({ ...formInputs, salary: e.target.value })
-                    }
-                >
-                    <option value="">Select your salary range</option>
-                    <option value="Less than $500">Less than $500</option>
-                    <option value="Between $500 and $2000">Between $500 and $2000</option>
-                    <option value="Above $2000">Above $2000</option>
-                </select>
-
+                <div className={`salary-wrapper ${formInputs.isEmployee ? "visible" : ""}`}>
+                    <label htmlFor="salary">Salary</label>
+                    <select
+                        id="salary"
+                        name="salary"
+                        value={formInputs.salary}
+                        onChange={(e) =>
+                            setFormInputs({ ...formInputs, salary: e.target.value })
+                        }
+                    >
+                        <option value="">Select your salary range</option>
+                        <option value="Less than $500">Less than $500</option>
+                        <option value="Between $500 and $2000">Between $500 and $2000</option>
+                        <option value="Above $2000">Above $2000</option>
+                    </select>
+                </div>
 
                 <button type="submit"
                     disabled={btnIsDisabled}

@@ -1,11 +1,11 @@
-import RegisterForm from './components/RegisterForm'
+import RequestLoanForm from './components/RequestLoanForm'
 import './App.css'
 
 function App() {
   return (
     <>
     
-    <RegisterForm/>
+    <RequestLoanForm/>
     </>
   )
 }
