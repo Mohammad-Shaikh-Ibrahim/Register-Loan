@@ -1,0 +1,50 @@
+/* Fullscreen dark overlay */
+#modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  backdrop-filter: blur(4px);
+}
+
+/* Shared modal content styling */
+#modal-content {
+  border-radius: 20px;
+  padding: 100px 150px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 0.5s ease-out;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+#modal-content.success {
+  background: linear-gradient(135deg, #06c76a, #16c610);
+}
+
+#modal-content.error {
+  background: linear-gradient(135deg, #e53935, #d32f2f);
+}
+
+#modal-content h1 {
+  font-size: 2rem;
+  color: white;
+  margin: 0;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
