@@ -1,14 +1,17 @@
 import './RequestLoanForm.css'
 import MyInput from './MyInput';
 import Modal from './Modal';
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { LoanInputContext } from "../contexts/LoanInputContextForm"
+import { UserContext } from '../contexts/UserContext';
 
 export default function RequestLoanForm() {
+    const userData = useContext(UserContext)
     const [errorMessage, setErrorMessage] = useState(null)
     const [showModal, setShowModal] = useState(false)
+    const initialName = userData.name
     const [formInputs, setFormInputs] = useState({
-        name: '',
+        name: initialName,
         phoneNumber: '',
         age: '',
         isEmployee: false,
@@ -48,6 +51,10 @@ export default function RequestLoanForm() {
     let btnIsDisabled = formInputs.name == "" || formInputs.phoneNumber == "" || formInputs.age == ""
     return (
         <div className='flex' onClick={handleHiddeModal}>
+            <div className='greet-form'>
+                <h1>Hello {userData.name} </h1>
+                <h2>Please Fill The Request Form</h2>
+            </div>
             <form onSubmit={handleSubmitPage} className="request-loan-form">
                 <h1>Request Loan</h1>
                 <hr />
@@ -56,21 +63,21 @@ export default function RequestLoanForm() {
                     handleChange: handleNameInputChange,
                     inputValue: formInputs.name,
                 }}>
-                    <MyInput/>
+                    <MyInput />
                 </LoanInputContext.Provider>
                 <LoanInputContext.Provider value={{
                     labelTitle: "Phone Number",
                     handleChange: handlePhoneNumberInputChange,
                     inputValue: formInputs.phoneNumber,
                 }}>
-                    <MyInput/>
+                    <MyInput />
                 </LoanInputContext.Provider>
                 <LoanInputContext.Provider value={{
                     labelTitle: "Age",
                     handleChange: handleAgeInputChange,
                     inputValue: formInputs.age,
                 }}>
-                    <MyInput/>
+                    <MyInput />
                 </LoanInputContext.Provider>
                 <label htmlFor="isEmployee">Are You an Employee?</label>
                 <input
